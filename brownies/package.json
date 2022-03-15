@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "now-build": "react-scripts build && mv build dist"
+    "now-build": "react-scripts build && mv build dist",
+    "brownies-are-cookies": "npm install && cd .. && cd server && npm install"
   },
   "eslintConfig": {
     "extends": [
