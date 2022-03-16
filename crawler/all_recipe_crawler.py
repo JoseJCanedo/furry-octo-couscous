@@ -25,24 +25,24 @@ class AllRecipes:
         html_content = urllib.request.urlopen(req).read()
 
         soup = BeautifulSoup(html_content, 'html.parser')
-
+        #soup.select("div", {"class":"card__detailsContainer-left"})
         search_data = []
-        articles = soup.findAll("article", {"class": "fixed-recipe-card"})
+        articles = soup.findAll("div", {"class":"card__detailsContainer-left"})
 
         print(articles)
 
         for article in articles:
             data = {}
             try:
-                data["name"] = article.find("h3", {"class": "fixed-recipe-card__h3"}).get_text().strip(' \t\n\r')
-                data["description"] = article.find("div", {"class": "fixed-recipe-card__description"}).get_text().strip(' \t\n\r')
-                data["url"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
+                data["name"] = article.find("h3", {"class": "card__title elementFont__resetHeading"}).get_text().strip(' \t\n\r')
+                data["description"] = article.find("div", {"class": "card__summary"}).get_text().strip(' \t\n\r')
+                data["url"] = article.find("a.card__titleLink", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
                 try:
                     data["image"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")["data-original-src"]
                 except Exception as e1:
                     pass
                 try:
-                    data["rating"] = float(article.find("div", {"class": "fixed-recipe-card__ratings"}).find("span")["data-ratingstars"])
+                    data["rating"] = float(article.find("div", {"class": "card__ratingContainer"}).find("span")["data-ratingstars"])
                 except ValueError:
                     data["rating"] = None
             except Exception as e2:
