@@ -15,41 +15,28 @@ class AllRecipes:
         https://www.allrecipes.com/search/results/?IngIncl=cocoa&search=brownies
         """
         base_url = "https://allrecipes.com/search/results/?"
-        query_url = urllib.parse.urlencode(query_dict)
-        print(query_url)
+        query_url = urllib.parse.sd(query_dict)
         url = base_url + query_url
-        print(url)
         req = urllib.request.Request(url)
         req.add_header('Cookie', 'euConsent=true')
-
         html_content = urllib.request.urlopen(req).read()
 
         soup = BeautifulSoup(html_content, 'html.parser')
-        #soup.select("div", {"class":"card__detailsContainer-left"})
+        soup.select("div", {"class":"card__detailsContainer-left"})
         search_data = []
-        articles = soup.findAll("div", {"class":"card__detailsContainer-left"})
+        recipe_container = soup.findAll("div", {"class":"card__recipe"})
 
-        print(articles)
-
-        for article in articles:
+        for recipe in recipe_container:
             data = {}
+            data["name"] = recipe.a.get("title")
+            data["description"] = recipe.find("div", {"class": "card__summary"}).get_text().strip().rstrip()
+            data["url"] = recipe.a.get("href")
             try:
-                data["name"] = article.find("h3", {"class": "card__title elementFont__resetHeading"}).get_text().strip(' \t\n\r')
-                data["description"] = article.find("div", {"class": "card__summary"}).get_text().strip(' \t\n\r')
-                data["url"] = article.find("a.card__titleLink", href=re.compile('^https://www.allrecipes.com/recipe/'))['href']
-                try:
-                    data["image"] = article.find("a", href=re.compile('^https://www.allrecipes.com/recipe/')).find("img")["data-original-src"]
-                except Exception as e1:
-                    pass
-                try:
-                    data["rating"] = float(article.find("div", {"class": "card__ratingContainer"}).find("span")["data-ratingstars"])
-                except ValueError:
-                    data["rating"] = None
-            except Exception as e2:
+                data["image"] =  recipe.img.get("src")
+            except Exception as e1:
                 pass
             if data and "image" in data:  # Do not include if no image -> its probably an add or something you do not want in your result
                 search_data.append(data)
-
         return search_data
 
     def get(url):
@@ -105,7 +92,7 @@ class AllRecipes:
 
 if __name__ == "__main__":
     query_options = {
-    "wt": "pork curry",         # Query keywords
+    "search": "pork curry",         # Query keywords
     "ingIncl": "olives",        # 'Must be included' ingrdients (optional)
     "ingExcl": "onions salad",  # 'Must not be included' ingredients (optional)
     "sort": "re"                # Sorting options : 're' for relevance, 'ra' for rating, 'p' for popular (optional)
