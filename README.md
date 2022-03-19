@@ -21,7 +21,8 @@ cd brownies
 
 jest: npm run test
 
-cypress: ./node_modules/.bin/cypress open
+Make sure the application is running.
+cypress: npm run cypress-test
 
 **
 
