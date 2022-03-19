@@ -11,6 +11,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
+    "react-tinder-card": "^1.4.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -18,7 +19,7 @@
     "start:app": "react-scripts start",
     "start:server": "cd .. && cd server && npm start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "now-build": "react-scripts build && mv build dist",
     "brownies-are-cookies": "npm install && cd .. && cd server && npm install"
