@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "../scss/App.scss";
 import axios from "../axios";
+//import { Carousel } from 'react-bootstrap';
 
 function App() {
   const[results, setResults] = useState('');
