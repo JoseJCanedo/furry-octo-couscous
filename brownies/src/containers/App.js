@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
+import "../scss/App.scss";
 import axios from "../axios";
 
 function App() {
