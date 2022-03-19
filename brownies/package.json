@@ -25,7 +25,7 @@
     "cypress-test": "$(npm bin)/cypress run",
     "eject": "react-scripts eject",
     "now-build": "react-scripts build && mv build dist",
-    "brownies-are-cookies": "npm install && cd .. && cd server && npm install"
+    "brownies-are-cookies": "npm install && $(npm bin)/cypress install && cd .. && cd server && npm install"
   },
   "eslintConfig": {
     "extends": [
