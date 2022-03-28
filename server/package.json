@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "express": "^4.17.3",
-    "jssoup": "^0.0.15"
+    "jssoup": "^0.0.15",
+    "xmlhttprequest": "^1.8.0"
   }
 }
