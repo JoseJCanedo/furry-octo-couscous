@@ -15,7 +15,7 @@ class AllRecipes:
         https://www.allrecipes.com/search/results/?IngIncl=cocoa&search=brownies
         """
         base_url = "https://allrecipes.com/search/results/?"
-        query_url = urllib.parse.sd(query_dict)
+        query_url = urllib.parse.urlencode(query_dict)
         url = base_url + query_url
         req = urllib.request.Request(url)
         req.add_header('Cookie', 'euConsent=true')
@@ -28,6 +28,8 @@ class AllRecipes:
 
         for recipe in recipe_container:
             data = {}
+            print(recipe)
+            break
             data["name"] = recipe.a.get("title")
             data["description"] = recipe.find("div", {"class": "card__summary"}).get_text().strip().rstrip()
             data["url"] = recipe.a.get("href")
