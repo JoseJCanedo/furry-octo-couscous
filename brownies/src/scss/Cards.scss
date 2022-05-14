@@ -7,7 +7,7 @@
     overflow: hidden;
   
     /* background: linear-gradient(#fff, #999); */
-    background: linear-gradient(#e66465, #9198e5);
+    background: linear-gradient(orange, #9198e5);
   
     > div {
       display: flex;
@@ -139,5 +139,13 @@
   
     100% {
       transform: scale(1, 1);
+    }
+  }
+  .cardContainer{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    .card{
+      flex: 1;
     }
   }

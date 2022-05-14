@@ -55,7 +55,6 @@ function searchRecipe(recipeName, includeIngredients, excludedIngrediants, sortO
     var responseText = httpGet(recipe_search_url.href)
 
     var soup = new JSSoup(responseText);
-
     search_data = [];
     recipe_container = soup.findAll("div", {"class":"card__recipe"});
     recipe_container.forEach(recipe => search_data.push(parseRecipeCard(recipe)));
