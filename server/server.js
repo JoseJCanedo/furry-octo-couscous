@@ -7,7 +7,7 @@ server.use(express.json());
 server.use(express.urlencoded({ extended: true }));
 
 server.get("/api/hello", (req, res) => {
-    res.status(200).send("Hello World Bitch!");
+    res.status(200).send("Hello World!");
 });
 
 server.get("/api/recipe", (req, res) => {
